@@ -54,9 +54,11 @@ app.put("/repositories/:id", checkExistsRepository, (request, response) => {
 });
 
 app.delete("/repositories/:id", checkExistsRepository, (request, response) => {
-  const { repository } = request;
+  const { id } = request.params;
 
-  repositories.splice(repository, 1);
+  const repositoryIndex = repositories.findIndex(repository => repository.id === id);
+
+  repositories.splice(repositoryIndex, 1);
 
   return response.status(204).send();
 });
